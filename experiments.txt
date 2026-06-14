@@ -1,0 +1,77 @@
+# Energy Consumption Forecasting Project - Experiment Log
+
+## Experiment 1: Baseline Model
+
+### Dataset
+
+* Appliances Energy Prediction Dataset
+* Records: 19,735
+* Target Variable: Appliances
+
+### Features Used
+
+* Appliances
+* T_out
+* RH_out
+* Windspeed
+* T1
+* RH_1
+* T2
+* RH_2
+* hour
+* day_of_week
+* month
+* is_weekend
+
+### Sequence Length
+
+* 24 timesteps
+
+### Model Architecture
+
+* LSTM Layers: 2
+* Hidden Size: 64
+* Dropout: 0.2
+* Dense Layer: 32 neurons
+* Optimizer: Adam
+* Loss Function: MSE
+* Epochs: 20
+
+### Results
+
+* MAE: 0.0248
+* RMSE: 0.0550
+* R² Score: 0.5808
+
+### Observations
+
+* Stable convergence during training.
+* No significant overfitting observed.
+* Validation loss remained close to training loss.
+* Hour of day emerged as the most important predictor.
+
+---
+
+## Feature Importance Analysis
+
+### Most Important Features
+
+1. hour (~0.177)
+2. T_out (~0.133)
+3. RH_1 (~0.124)
+4. RH_2 (~0.122)
+5. RH_out (~0.108)
+
+### Least Important Features
+
+1. is_weekend (~0.004)
+2. month (~0.020)
+3. day_of_week (~0.042)
+
+### Observation
+
+* Time-of-day is the strongest predictor of household energy consumption.
+* Weekend and month contribute very little predictive power.
+* Future experiments should evaluate removing weak features.
+
+---
