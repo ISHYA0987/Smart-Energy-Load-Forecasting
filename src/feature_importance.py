@@ -3,9 +3,6 @@ import matplotlib.pyplot as plt
 
 from sklearn.ensemble import RandomForestRegressor
 
-# ==========================
-# LOAD DATA
-# ==========================
 
 df = pd.read_csv(
     "data/processed/cleaned_energy_data.csv"
@@ -13,9 +10,7 @@ df = pd.read_csv(
 
 print("Dataset Shape:", df.shape)
 
-# ==========================
-# FEATURES & TARGET
-# ==========================
+
 
 X = df.drop(
     "Appliances",
@@ -24,9 +19,6 @@ X = df.drop(
 
 y = df["Appliances"]
 
-# ==========================
-# RANDOM FOREST
-# ==========================
 
 rf = RandomForestRegressor(
     n_estimators=100,
@@ -40,9 +32,6 @@ rf.fit(X, y)
 
 print("Training Completed!")
 
-# ==========================
-# FEATURE IMPORTANCE
-# ==========================
 
 importance = rf.feature_importances_
 
@@ -61,18 +50,14 @@ print("=" * 50)
 
 print(feature_importance)
 
-# ==========================
-# SAVE CSV
-# ==========================
+
 
 feature_importance.to_csv(
     "data/processed/feature_importance.csv",
     index=False
 )
 
-# ==========================
-# PLOT
-# ==========================
+
 
 plt.figure(figsize=(10, 6))
 
