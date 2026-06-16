@@ -49,7 +49,7 @@ print(df.shape)
 print("\nFirst 5 Rows:")
 print(df.head())
 
-output_path = r"C:\Users\ishya b\Desktop\SELF\data\proccessed\cleaned_energy_data.csv"
+output_path = r"C:\Users\ishya b\Desktop\SELF\data\processed\cleaned_energy_data.csv"
 
 df.to_csv(output_path, index=False)
 

@@ -4,7 +4,7 @@ from sklearn.preprocessing import MinMaxScaler
 import joblib
 
 
-df = pd.read_csv("data/proccessed/cleaned_energy_data.csv")
+df = pd.read_csv("data/processed/cleaned_energy_data.csv")
 
 features = [
     "Appliances",
@@ -37,7 +37,7 @@ scaled_df = pd.DataFrame(
 )
 
 scaled_df.to_csv(
-    "data/proccessed/scaled_energy_data.csv",
+    "data/processed/scaled_energy_data.csv",
     index=False
 )
 

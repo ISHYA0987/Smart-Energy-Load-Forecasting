@@ -11,13 +11,19 @@ from sklearn.metrics import (
 )
 from model import EnergyLSTM
 
+# ==========================
+# LOAD DATA
+# ==========================
 
-X = np.load("data/proccessed/X.npy")
-y = np.load("data/proccessed/y.npy")
+X = np.load("data/processed/X.npy")
+y = np.load("data/processed/y.npy")
 
 print("X Shape:", X.shape)
 print("y Shape:", y.shape)
 
+# ==========================
+# TRAIN / VAL / TEST SPLIT
+# ==========================
 
 train_size = int(len(X) * 0.70)
 val_size = int(len(X) * 0.15)
@@ -37,7 +43,9 @@ print("Train      :", X_train.shape)
 print("Validation :", X_val.shape)
 print("Test       :", X_test.shape)
 
-
+# ==========================
+# CONVERT TO TENSORS
+# ==========================
 
 X_train = torch.tensor(
     X_train,
@@ -69,6 +77,9 @@ y_test = torch.tensor(
     dtype=torch.float32
 ).reshape(-1, 1)
 
+# ==========================
+# DATALOADER
+# ==========================
 
 train_dataset = TensorDataset(
     X_train,
@@ -82,6 +93,11 @@ train_loader = DataLoader(
 )
 
 
+
+# ==========================
+# DEVICE
+# ==========================
+
 device = torch.device(
     "cuda" if torch.cuda.is_available()
     else "cpu"
@@ -89,6 +105,9 @@ device = torch.device(
 
 print("\nUsing Device:", device)
 
+# ==========================
+# INITIALIZE MODEL
+# ==========================
 
 model = EnergyLSTM().to(device)
 
@@ -101,6 +120,9 @@ optimizer = torch.optim.Adam(
 
 epochs = 20
 
+# ==========================
+# TRAINING
+# ==========================
 
 train_losses = []
 val_losses = []
@@ -139,6 +161,9 @@ for epoch in range(epochs):
         avg_train_loss
     )
 
+    # ======================
+    # VALIDATION
+    # ======================
 
     model.eval()
 
@@ -163,6 +188,9 @@ for epoch in range(epochs):
         f"Val Loss: {val_loss.item():.6f}"
     )
 
+# ==========================
+# TEST EVALUATION
+# ==========================
 
 model.eval()
 
@@ -206,7 +234,9 @@ print(f"MAE  : {mae:.4f}")
 print(f"RMSE : {rmse:.4f}")
 print(f"R²   : {r2:.4f}")
 
-
+# ==========================
+# SAVE MODEL
+# ==========================
 
 torch.save(
     model.state_dict(),
@@ -215,6 +245,9 @@ torch.save(
 
 print("\nModel Saved Successfully!")
 
+# ==========================
+# TRAINING GRAPH
+# ==========================
 
 plt.figure(figsize=(8, 5))
 

@@ -2,14 +2,14 @@ import pandas as pd
 import numpy as np
 
 df = pd.read_csv(
-    "data/proccessed/scaled_energy_data.csv"
+    "data/processed/scaled_energy_data.csv"
 )
 
 print("Dataset Shape:", df.shape)
 
 data = df.values
 
-SEQUENCE_LENGTH = 48
+SEQUENCE_LENGTH = 12
 
 X = []
 y = []
@@ -35,15 +35,15 @@ print("y shape:", y.shape)
 
 
 np.save(
-    "data/proccessed/X.npy",
+    "data/processed/X.npy",
     X
 )
 
 np.save(
-    "data/proccessed/y.npy",
+    "data/processed/y.npy",
     y
 )
 
 print("\nFiles Saved:")
-print("data/proccessed/X.npy")
-print("data/proccessed/y.npy")
+print("data/processed/X.npy")
+print("data/processed/y.npy")
