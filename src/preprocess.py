@@ -16,7 +16,9 @@ features = [
     "T2",
     "RH_2",
     "hour",
-    "day_of_week"
+    "day_of_week",
+    "month",
+    "is_weekend"
 ]
 
 df = df[features]

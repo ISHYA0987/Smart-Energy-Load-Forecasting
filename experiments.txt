@@ -75,3 +75,48 @@
 * Future experiments should evaluate removing weak features.
 
 ---
+## Experiment 2: Reduced Feature Set
+
+Removed Features:
+- month
+- is_weekend
+
+Sequence Length:
+24
+
+Results:
+MAE  : 0.0315
+RMSE : 0.0572
+R²   : 0.5460
+
+Comparison with Baseline:
+- MAE increased
+- RMSE increased
+- R² decreased
+
+
+Conclusion:
+Removing low-importance features degraded model performance.
+The original 12-feature model was retained.
+
+## Experiment 3: Sequence Length 48
+
+Features:
+Original 12 Features
+
+Sequence Length:
+48
+
+Results:
+MAE  : 0.0334
+RMSE : 0.0573
+R²   : 0.5450
+
+Comparison with Baseline:
+- MAE increased
+- RMSE increased
+- R² decreased
+
+Conclusion:
+Using a longer sequence length degraded performance.
+The 24-timestep sequence remains the optimal choice.

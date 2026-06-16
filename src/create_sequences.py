@@ -9,7 +9,7 @@ print("Dataset Shape:", df.shape)
 
 data = df.values
 
-SEQUENCE_LENGTH = 24
+SEQUENCE_LENGTH = 48
 
 X = []
 y = []

@@ -10,7 +10,7 @@ class EnergyLSTM(nn.Module):
         super().__init__()
 
         self.lstm = nn.LSTM(
-            input_size=10,
+            input_size=12,
             hidden_size=64,
             num_layers=2,
             batch_first=True,
