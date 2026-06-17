@@ -6,16 +6,6 @@ import joblib
 from datetime import datetime, timedelta
 from model import EnergyLSTM
 
-# ==========================
-# MODEL DEFINITION
-# ==========================
-
-
-
-
-# ==========================
-# LOAD MODEL
-# ==========================
 
 device = torch.device(
     "cuda" if torch.cuda.is_available() else "cpu"
@@ -32,30 +22,20 @@ model.load_state_dict(
 
 model.eval()
 
-# ==========================
-# LOAD SCALER
-# ==========================
 
 scaler = joblib.load(
     "models/scaler.pkl"
 )
 
-# ==========================
-# LOAD DATA
-# ==========================
-
 df = pd.read_csv(
     "data/processed/scaled_energy_data.csv"
 )
 
-# Last 24 timesteps
+
 current_sequence = df.values[-24:]
 
 forecast = []
 
-# ==========================
-# FORECAST NEXT 24 HOURS
-# ==========================
 
 for hour in range(24):
 
@@ -77,7 +57,6 @@ for hour in range(24):
 
     scaled_prediction = prediction.item()
 
-    # Convert prediction back to real units
     dummy = np.zeros((1, 12))
     dummy[0][0] = scaled_prediction
 
@@ -87,13 +66,12 @@ for hour in range(24):
 
     forecast.append(actual_prediction)
 
-    # Create next row
+
     next_row = current_sequence[-1].copy()
 
-    # Update Appliances value only
+
     next_row[0] = scaled_prediction
 
-    # Slide window
     current_sequence = np.vstack(
         [
             current_sequence[1:],
@@ -101,9 +79,6 @@ for hour in range(24):
         ]
     )
 
-# ==========================
-# DISPLAY RESULTS
-# ==========================
 
 print("\n24 Hour Forecast")
 print("=" * 40)
@@ -122,9 +97,7 @@ for i, value in enumerate(forecast):
         f"{forecast_times[i].strftime('%H:%M')} -> {value:.2f} Wh"
     )
 
-# ==========================
-# PEAK DETECTION
-# ==========================
+
 peak_threshold = np.mean(forecast) + np.std(forecast)
 
 print(f"\nPeak Threshold: {peak_threshold:.2f} Wh")
@@ -148,16 +121,14 @@ if peak_hours:
 else:
     print("No peak hours detected")
 
-# ==========================
-# RECOMMENDATIONS
-# ==========================
+
 print("\nSMART RECOMMENDATIONS")
 print("=" * 40)
 
-# Get hours sorted by lowest load
+
 sorted_indices = np.argsort(forecast)
 
-# Top 3 lowest-load hours
+
 best_hours = sorted_indices[:3]
 
 print("\nRecommended Low Load Windows:")
@@ -170,7 +141,7 @@ for idx in best_hours:
         f"{time_str} -> {forecast[idx]:.2f} Wh"
     )
 
-# Peak hours
+
 print("\nAvoid Heavy Appliance Usage:")
 
 for idx in np.argsort(forecast)[-3:]:

@@ -7,17 +7,10 @@ import joblib
 
 from model import EnergyLSTM
 
-# ==========================
-# CONFIG
-# ==========================
-
 SEQUENCE_LENGTH = 12
 
 os.makedirs("results", exist_ok=True)
 
-# ==========================
-# LOAD MODEL
-# ==========================
 
 device = torch.device(
     "cuda" if torch.cuda.is_available()
@@ -37,17 +30,11 @@ model.eval()
 
 print("Model Loaded Successfully")
 
-# ==========================
-# LOAD DATA
-# ==========================
 
 X = np.load("data/processed/X.npy")
 
 last_sequence = X[-1]
 
-# ==========================
-# FORECAST 24 HOURS
-# ==========================
 
 forecast = []
 
@@ -80,9 +67,6 @@ for _ in range(24):
         ]
     )
 
-# ==========================
-# INVERSE SCALE
-# ==========================
 
 scaler = joblib.load(
     "models/scaler.pkl"
@@ -104,9 +88,7 @@ for value in forecast:
 
     real_forecast.append(actual)
 
-# ==========================
-# TIMESTAMPS
-# ==========================
+
 
 start_time = datetime.now()
 
@@ -120,9 +102,7 @@ for i in range(24):
         t.strftime("%H:%M")
     )
 
-# ==========================
-# SAVE FORECAST CSV
-# ==========================
+
 
 forecast_df = pd.DataFrame({
 
@@ -140,9 +120,6 @@ print(
     "Forecast CSV Saved"
 )
 
-# ==========================
-# PEAK HOURS
-# ==========================
 
 threshold = (
     np.mean(real_forecast)
@@ -160,9 +137,6 @@ for time, value in zip(
 
         peak_hours.append(time)
 
-# ==========================
-# RECOMMENDATIONS
-# ==========================
 
 sorted_indices = np.argsort(real_forecast)
 
@@ -177,9 +151,7 @@ recommendations = [
     f"Avoid simultaneous appliance usage around {times[np.argmax(real_forecast)]}"
 
 ]
-# ==========================
-# SAVE RECOMMENDATIONS
-# ==========================
+
 
 with open(
     "results/recommendations.txt",
@@ -192,10 +164,6 @@ with open(
             rec + "\n"
         )
 
-# ==========================
-# SAVE PEAK HOURS
-# ==========================
-
 with open(
     "results/peak_hours.txt",
     "w"
@@ -207,9 +175,6 @@ with open(
             hour + "\n"
         )
 
-# ==========================
-# SAVE MODEL METRICS
-# ==========================
 
 with open(
     "results/model_metrics.txt",
