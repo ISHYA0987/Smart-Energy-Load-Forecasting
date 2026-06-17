@@ -1,138 +1,116 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
+{% block content %}
 
-    <title>
-        Energy Forecast Dashboard
-    </title>
+<h1 class="text-center mb-4">
+⚡ Smart Energy Consumption Dashboard
+</h1>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+<div class="card p-4 mb-4">
 
-</head>
+    <h3>
+        📈 24 Hour Forecast
+    </h3>
 
-<body>
+    <canvas id="forecastChart"></canvas>
 
-<div class="container">
+</div>
 
-    <h1>
-        Smart Energy Consumption Forecasting
-    </h1>
+<div class="row">
 
-    <div class="grid">
+    <div class="col-md-4">
 
-        <div class="card">
-            <h2>MAE</h2>
-            <p>{{ metrics.mae }}</p>
+        <div class="card h-100">
+
+            <div class="card-body">
+
+                <h4>
+                    🔴 Peak Hours
+                </h4>
+
+                <ul>
+
+                    {% for hour in peak_hours %}
+                    <li>{{ hour }}</li>
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
         </div>
 
-        <div class="card">
-            <h2>RMSE</h2>
-            <p>{{ metrics.rmse }}</p>
+    </div>
+
+    <div class="col-md-8">
+
+        <div class="card h-100">
+
+            <div class="card-body">
+
+                <h4>
+                    💡 Recommendations
+                </h4>
+
+                <ul>
+
+                    {% for rec in recommendations %}
+                    <li>{{ rec }}</li>
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
         </div>
-
-        <div class="card">
-            <h2>R² Score</h2>
-            <p>{{ metrics.r2 }}</p>
-        </div>
-
-    </div>
-
-    <div class="card">
-
-        <h2>Peak Hours</h2>
-
-        <ul>
-
-        {% for hour in peak_hours %}
-
-            <li>{{ hour }}</li>
-
-        {% endfor %}
-
-        </ul>
-
-    </div>
-
-    <div class="card">
-
-        <h2>Recommendations</h2>
-
-        <ul>
-
-        {% for rec in recommendations %}
-
-            <li>{{ rec }}</li>
-
-        {% endfor %}
-
-        </ul>
-
-    </div>
-
-    <div class="card">
-
-        <h2>24 Hour Forecast</h2>
-
-        <table>
-
-            <tr>
-
-                <th>Time</th>
-                <th>Forecast (Wh)</th>
-
-            </tr>
-
-            {% for row in forecast %}
-
-            <tr>
-
-                <td>{{ row.Time }}</td>
-
-                <td>
-                    {{ "%.2f"|format(row.Forecast_Wh) }}
-                </td>
-
-            </tr>
-
-            {% endfor %}
-
-        </table>
-
-    </div>
-
-    <div class="card">
-
-        <h2>Forecast Graph</h2>
-
-        <img
-        src="{{ url_for('static',
-        filename='images/forecast_24h.png') }}">
-
-    </div>
-
-    <div class="card">
-
-        <h2>Feature Importance</h2>
-
-        <img
-        src="{{ url_for('static',
-        filename='images/feature_importance.png') }}">
-
-    </div>
-
-    <div class="card">
-
-        <h2>Training vs Validation Loss</h2>
-
-        <img
-        src="{{ url_for('static',
-        filename='images/training_validation_loss.png') }}">
 
     </div>
 
 </div>
 
-</body>
-</html>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+const labels = {{ times|tojson }};
+const values = {{ values|tojson }};
+
+const ctx =
+document.getElementById(
+'forecastChart'
+);
+
+new Chart(ctx, {
+
+    type: 'line',
+
+    data: {
+
+        labels: labels,
+
+        datasets: [{
+
+            label: 'Forecast (Wh)',
+
+            data: values,
+
+            borderColor: 'rgb(54,162,235)',
+
+            backgroundColor:
+            'rgba(54,162,235,0.2)',
+
+            fill: true,
+
+            tension: 0.3
+
+        }]
+
+    }
+
+});
+
+</script>
+
+{% endblock %}

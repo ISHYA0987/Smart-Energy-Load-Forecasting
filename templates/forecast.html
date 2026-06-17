@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>
+Forecast Details
+</h1>
+
+<div class="row mb-4">
+
+    <div class="col-md-4">
+
+        <div class="card border-success">
+
+            <div class="card-body text-center">
+
+                <h3>🟢 Low Load</h3>
+
+                <p>
+                    Best time for heavy appliances
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card border-warning">
+
+            <div class="card-body text-center">
+
+                <h3>🟡 Medium Load</h3>
+
+                <p>
+                    Normal usage
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card border-danger">
+
+            <div class="card-body text-center">
+
+                <h3>🔴 High Load</h3>
+
+                <p>
+                    Avoid simultaneous appliance usage
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card p-4">
+
+    <h3>
+        Forecast Table
+    </h3>
+
+    <table class="table">
+
+        <thead>
+
+            <tr>
+
+                <th>Time</th>
+                <th>Forecast (Wh)</th>
+                <th>Zone</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for row in forecast %}
+
+            <tr class="
+                {% if row.zone == 'Low' %}
+                    table-success
+                {% elif row.zone == 'High' %}
+                    table-danger
+                {% else %}
+                    table-warning
+                {% endif %}
+            ">
+
+                <td>{{ row.Time }}</td>
+
+                <td>
+                    {{ "%.2f"|format(row.Forecast_Wh) }}
+                </td>
+
+                <td>{{ row.zone }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

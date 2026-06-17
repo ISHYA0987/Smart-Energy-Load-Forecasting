@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>
+Analytics
+</h1>
+<div class="row justify-content-center g-4">
+<div class="row mb-4">
+
+    <div class="col-lg-3 col-md-4">
+
+        <div class="card metric-card">
+
+            <div class="card-body text-center">
+
+                <h5>MAE</h5>
+
+                <h2>{{ metrics.mae }}</h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-4">
+
+        <div class="card metric-card">
+
+            <div class="card-body text-center">
+
+                <h5>RMSE</h5>
+
+                <h2>{{ metrics.rmse }}</h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-4">
+
+        <div class="card metric-card">
+
+            <div class="card-body text-center">
+
+                <h5>R² Score</h5>
+
+                <h2>{{ metrics.r2 }}</h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+<div class="card p-4 mb-4">
+
+    <h3>
+        Feature Importance
+    </h3>
+
+    <img
+    class="img-fluid"
+    src="{{ url_for('static',
+    filename='images/feature_importance.png') }}">
+
+</div>
+
+<div class="card p-4">
+
+    <h3>
+        Training vs Validation Loss
+    </h3>
+
+    <img
+    class="img-fluid"
+    src="{{ url_for('static',
+    filename='images/training_validation_loss.png') }}">
+
+</div>
+
+{% endblock %}

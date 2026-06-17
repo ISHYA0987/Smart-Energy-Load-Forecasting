@@ -120,3 +120,84 @@ Comparison with Baseline:
 Conclusion:
 Using a longer sequence length degraded performance.
 The 24-timestep sequence remains the optimal choice.
+
+## Experiment 4: Sequence Length 12
+
+Features:
+Original 12 Features
+
+Sequence Length:
+12
+
+Results:
+MAE  : 0.0244
+RMSE : 0.0544
+R²   : 0.5905
+
+Comparison with Baseline:
+- MAE approximately equal
+- RMSE improved
+- R² improved
+
+Conclusion:
+A shorter sequence captured recent appliance behavior more effectively.
+Sequence Length = 12 produced the best overall performance and was selected as the final model.
+
+## Forecasting Module
+
+### Forecast Horizon
+
+* 24 Hours Ahead
+
+### Forecast Method
+
+* Recursive Forecasting
+
+### Peak Detection
+
+Threshold:
+Mean Forecast + Standard Deviation
+
+### Recommendation Engine
+
+Low Load Window:
+
+* Recommended for washing machine
+* Recommended for charging devices
+* Recommended for water heater
+
+Peak Load Window:
+
+* Avoid simultaneous heavy appliance usage
+
+### Example Forecast Output
+
+Peak Hours:
+
+* Hour 1
+* Hour 2
+
+Best Low Load Window:
+
+* Hour 6
+
+---
+
+## Future Improvements
+
+1. Reduced feature set evaluation
+2. Sequence length comparison
+3. Bidirectional LSTM
+4. Hyperparameter tuning
+5. Flask dashboard
+6. Interactive forecast visualization
+7. Real-time prediction API
+
+---
+
+Current Best Model:
+Baseline LSTM (12 timestep window)
+
+MAE  : 0.0244
+RMSE : 0.0544
+R²   : 0.5905
