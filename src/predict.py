@@ -4,7 +4,16 @@ import torch
 import torch.nn as nn
 import joblib
 from model import EnergyLSTM
+# ==========================
+# LSTM MODEL
+# ==========================
 
+
+
+
+# ==========================
+# LOAD MODEL
+# ==========================
 
 device = torch.device(
     "cuda" if torch.cuda.is_available() else "cpu"
@@ -21,16 +30,23 @@ model.load_state_dict(
 
 model.eval()
 
+# ==========================
+# LOAD SCALER
+# ==========================
+
 scaler = joblib.load(
     "models/scaler.pkl"
 )
 
+# ==========================
+# LOAD SCALED DATA
+# ==========================
 
 df = pd.read_csv(
     "data/processed/scaled_energy_data.csv"
 )
 
-
+# Last 24 records
 last_sequence = df.values[-24:]
 
 last_sequence = np.expand_dims(
@@ -43,6 +59,9 @@ last_sequence = torch.tensor(
     dtype=torch.float32
 ).to(device)
 
+# ==========================
+# PREDICT
+# ==========================
 
 with torch.no_grad():
 
@@ -57,6 +76,9 @@ print(
     scaled_prediction
 )
 
+# ==========================
+# INVERSE SCALE
+# ==========================
 
 dummy = np.zeros(
     (1, 12)
