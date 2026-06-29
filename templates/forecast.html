@@ -1,62 +1,94 @@
 {% extends "base.html" %}
-
+{% block title %}Forecast{% endblock %}
+{% block styles %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/forecast.css') }}">
+{% endblock %}
 {% block content %}
+<div class="forecast-header">
 
-<h1>
-Forecast Details
-</h1>
+    <div>
 
-<div class="row mb-4">
+        <h2>📈 Forecast Details</h2>
 
-    <div class="col-md-4">
+        <p>
 
-        <div class="card border-success">
+            Explore the predicted energy consumption
+            for every forecast interval.
 
-            <div class="card-body text-center">
+        </p>
 
-                <h3>🟢 Low Load</h3>
+    </div>
 
-                <p>
-                    Best time for heavy appliances
-                </p>
+    <span class="badge bg-success">
 
-            </div>
+        24 Hour Forecast
+
+    </span>
+
+</div>
+
+<div class="row g-4 mb-4">
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="summary-card">
+
+            <i class="bi bi-graph-up-arrow"></i>
+
+            <span>Highest Load</span>
+
+            <h3>{{ highest }}</h3>
+
+            <small>Wh</small>
 
         </div>
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-lg-3 col-md-6">
 
-        <div class="card border-warning">
+        <div class="summary-card">
 
-            <div class="card-body text-center">
+            <i class="bi bi-graph-down-arrow"></i>
 
-                <h3>🟡 Medium Load</h3>
+            <span>Lowest Load</span>
 
-                <p>
-                    Normal usage
-                </p>
+            <h3>{{ lowest }}</h3>
 
-            </div>
+            <small>Wh</small>
 
         </div>
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-lg-3 col-md-6">
 
-        <div class="card border-danger">
+        <div class="summary-card">
 
-            <div class="card-body text-center">
+            <i class="bi bi-bar-chart-fill"></i>
 
-                <h3>🔴 High Load</h3>
+            <span>Average Load</span>
 
-                <p>
-                    Avoid simultaneous appliance usage
-                </p>
+            <h3>{{ average }}</h3>
 
-            </div>
+            <small>Wh</small>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="summary-card">
+
+            <i class="bi bi-clock-fill"></i>
+
+            <span>Forecast Points</span>
+
+            <h3>{{ total }}</h3>
+
+            <small>Hours</small>
 
         </div>
 
@@ -64,56 +96,262 @@ Forecast Details
 
 </div>
 
-<div class="card p-4">
+<div class="card">
 
-    <h3>
-        Forecast Table
-    </h3>
+    <div class="card-body">
 
-    <table class="table">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
 
-        <thead>
+            <h4 class="fw-bold mb-0">
 
-            <tr>
+                📋 24-Hour Forecast
 
-                <th>Time</th>
-                <th>Forecast (Wh)</th>
-                <th>Zone</th>
+            </h4>
 
-            </tr>
+            <div class="d-flex gap-3 align-items-center flex-wrap">
 
-        </thead>
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="form-control"
+                    placeholder="Search time...">
 
-        <tbody>
+                <select
+                    id="zoneFilter"
+                    class="form-select">
 
-            {% for row in forecast %}
+                    <option value="All">All Zones</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
 
-            <tr class="
-                {% if row.zone == 'Low' %}
-                    table-success
-                {% elif row.zone == 'High' %}
-                    table-danger
+                </select>
+
+                <div class="btn-group">
+
+                    <button
+                        class="btn btn-primary"
+                        id="tableViewBtn">
+
+                        <i class="bi bi-table"></i>
+
+                        Table
+
+                    </button>
+
+                    <button
+                        class="btn btn-outline-primary"
+                        id="cardViewBtn">
+
+                        <i class="bi bi-grid-3x3-gap-fill"></i>
+
+                        Cards
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+      <!-- ================= Table View ================= -->
+
+<div id="tableView">
+
+    <div class="table-responsive">
+
+        <table class="table forecast-table align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>Time</th>
+
+                    <th>Forecast</th>
+
+                    <th>Zone</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="forecastTable">
+
+                {% for row in forecast %}
+
+                <tr>
+
+                    <td>
+
+                        <strong>{{ row.Time }}</strong>
+
+                    </td>
+
+                    <td>
+
+                        {{ "%.2f"|format(row.Forecast_Wh) }} Wh
+
+                    </td>
+
+                    <td>
+
+                        {% if row.zone == "High" %}
+
+                            <span class="badge bg-danger">
+
+                                High
+
+                            </span>
+
+                        {% elif row.zone == "Medium" %}
+
+                            <span class="badge bg-warning text-dark">
+
+                                Medium
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-success">
+
+                                Low
+
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {% if row.zone == "High" %}
+
+                            🔴 Peak Load
+
+                        {% elif row.zone == "Medium" %}
+
+                            🟡 Normal
+
+                        {% else %}
+
+                            🟢 Efficient
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- ================= Card View ================= -->
+
+<div
+    id="cardView"
+    class="row g-4"
+    style="display:none;">
+
+    {% for row in forecast %}
+
+    <div
+        class="col-xl-3 col-lg-4 col-md-6 forecast-card-item"
+        data-zone="{{ row.zone }}"
+        data-time="{{ row.Time }}">
+
+        <div class="forecast-card">
+
+            <div class="forecast-time">
+
+                {{ row.Time }}
+
+            </div>
+
+            <div class="forecast-value">
+
+                {{ "%.2f"|format(row.Forecast_Wh) }}
+
+                <small>Wh</small>
+
+            </div>
+
+            <div class="mb-3">
+
+                {% if row.zone == "High" %}
+
+                    <span class="badge bg-danger">
+
+                        🔴 High Load
+
+                    </span>
+
+                {% elif row.zone == "Medium" %}
+
+                    <span class="badge bg-warning text-dark">
+
+                        🟡 Medium Load
+
+                    </span>
+
                 {% else %}
-                    table-warning
+
+                    <span class="badge bg-success">
+
+                        🟢 Low Load
+
+                    </span>
+
                 {% endif %}
-            ">
 
-                <td>{{ row.Time }}</td>
+            </div>
 
-                <td>
-                    {{ "%.2f"|format(row.Forecast_Wh) }}
-                </td>
+            <small class="text-muted">
 
-                <td>{{ row.zone }}</td>
+                {% if row.zone == "High" %}
 
-            </tr>
+                    Peak consumption expected.
 
-            {% endfor %}
+                {% elif row.zone == "Medium" %}
 
-        </tbody>
+                    Normal operating period.
 
-    </table>
+                {% else %}
+
+                    Best time to run appliances.
+
+                {% endif %}
+
+            </small>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
 
 </div>
+
+    </div>   <!-- card-body -->
+
+</div>       <!-- card -->
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='js/forecast.js') }}"></script>
 
 {% endblock %}

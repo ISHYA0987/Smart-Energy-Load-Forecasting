@@ -324,18 +324,33 @@ def dashboard():
 @app.route("/forecast")
 def forecast():
 
-    forecast_df, forecast_records = (
-        get_forecast_data()
-    )
+    forecast_df, forecast_records = get_forecast_data()
+
+    highest = round(forecast_df["Forecast_Wh"].max(), 2)
+    lowest = round(forecast_df["Forecast_Wh"].min(), 2)
+    average = round(forecast_df["Forecast_Wh"].mean(), 2)
+    total = len(forecast_df)
+    peak_row = forecast_df.loc[forecast_df["Forecast_Wh"].idxmax()]
+
+    low_row = forecast_df.loc[forecast_df["Forecast_Wh"].idxmin()]
 
     return render_template(
 
         "forecast.html",
 
-        forecast=forecast_records
+        forecast=forecast_records,
+
+        highest=highest,
+        lowest=lowest,
+        average=average,
+        total=total,
+        peak_hour = peak_row["Time"],
+        peak_value = round(peak_row["Forecast_Wh"], 2),
+
+        low_hour = low_row["Time"],
+        low_value = round(low_row["Forecast_Wh"], 2)
 
     )
-
 
 @app.route("/analytics")
 def analytics():
