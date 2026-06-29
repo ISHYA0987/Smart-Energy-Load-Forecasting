@@ -1,47 +1,689 @@
 {% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block styles %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/about.css') }}">
+
+{% endblock %}
+
 {% block page_title %}
 About Project
 {% endblock %}
 
 {% block subtitle %}
-Smart Energy Consumption Forecasting using Deep Learning.
+Smart Energy Consumption Forecasting using LSTM Deep Learning
 {% endblock %}
 
 {% block content %}
 
+<!-- ================= Project Overview ================= -->
 
+<div class="card about-card mb-5">
 
-<div class="card p-4">
+    <div class="card-body">
 
-    <h3>
-        Smart Energy Consumption Forecasting
-    </h3>
+        <div class="row align-items-center">
 
-    <p>
+            <div class="col-lg-8">
 
-        This project predicts household energy
-        consumption using an LSTM Neural Network.
+                <span class="badge bg-primary mb-3">
 
-    </p>
+                    ⚡ AI Powered Energy Forecasting
 
-    <ul>
+                </span>
 
-        <li>Data Cleaning & EDA</li>
+                <h2 class="fw-bold mb-3">
 
-        <li>Feature Engineering</li>
+                    Smart Energy Consumption Forecasting
 
-        <li>LSTM Forecasting</li>
+                </h2>
 
-        <li>24 Hour Energy Forecast</li>
+                <p class="lead text-muted">
 
-        <li>Peak Load Detection</li>
+                    This project leverages a Long Short-Term Memory (LSTM)
+                    deep learning model to forecast future energy consumption
+                    based on historical usage patterns. The system helps users
+                    analyze predicted energy demand, identify peak load periods,
+                    and make informed decisions to improve energy efficiency.
 
-        <li>Recommendation Engine</li>
+                </p>
 
-        <li>Flask Dashboard</li>
+            </div>
 
-    </ul>
+            <div class="col-lg-4">
+
+                <div class="project-highlight">
+
+                    <div>
+
+                        <small>Forecast Horizon</small>
+
+                        <h4>24 Hours</h4>
+
+                    </div>
+
+                    <div>
+
+                        <small>Deep Learning</small>
+
+                        <h4>LSTM</h4>
+
+                    </div>
+
+                    <div>
+
+                        <small>Framework</small>
+
+                        <h4>PyTorch</h4>
+
+                    </div>
+
+                    <div>
+
+                        <small>Prediction Type</small>
+
+                        <h4>Regression</h4>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
+<!-- ================= Problem Statement ================= -->
+
+<div class="card about-card mb-5">
+
+    <div class="card-body">
+
+        <div class="mb-4">
+
+            <h4 class="fw-bold">
+
+                🎯 Problem Statement
+
+            </h4>
+
+            <p class="text-muted mb-0">
+
+                Understanding the need for intelligent energy forecasting.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Challenge -->
+
+            <div class="col-lg-6">
+
+                <div class="problem-card">
+
+                    <div class="problem-icon danger">
+
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>Challenges</h5>
+
+                        <p>
+
+                            Traditional energy management systems rely on
+                            historical observations and manual planning,
+                            making it difficult to accurately predict future
+                            electricity demand. This often leads to inefficient
+                            energy utilization, increased operational costs,
+                            and difficulty in identifying peak load periods.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Solution -->
+
+            <div class="col-lg-6">
+
+                <div class="problem-card">
+
+                    <div class="problem-icon success">
+
+                        <i class="bi bi-lightbulb-fill"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>Proposed Solution</h5>
+
+                        <p>
+
+                            This project applies a Long Short-Term Memory
+                            (LSTM) neural network to learn temporal energy
+                            consumption patterns and generate accurate
+                            24-hour forecasts. The dashboard provides
+                            interactive visualizations, identifies peak
+                            consumption periods, and supports smarter
+                            energy management decisions.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ================= Key Features ================= -->
+
+<div class="card about-card mb-5">
+
+    <div class="card-body">
+
+        <div class="mb-4">
+
+            <h4 class="fw-bold">
+
+                🚀 Key Features
+
+            </h4>
+
+            <p class="text-muted mb-0">
+
+                Core functionalities of the Smart Energy Forecasting System.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Feature 1 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon blue">
+
+                        <i class="bi bi-graph-up-arrow"></i>
+
+                    </div>
+
+                    <h5>24-Hour Forecasting</h5>
+
+                    <p>
+
+                        Predicts electricity consumption for the next
+                        24 hours using historical energy usage patterns.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Feature 2 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon green">
+
+                        <i class="bi bi-cpu-fill"></i>
+
+                    </div>
+
+                    <h5>LSTM Deep Learning</h5>
+
+                    <p>
+
+                        Utilizes a two-layer LSTM neural network to
+                        learn temporal dependencies in energy data.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Feature 3 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon orange">
+
+                        <i class="bi bi-speedometer2"></i>
+
+                    </div>
+
+                    <h5>Interactive Dashboard</h5>
+
+                    <p>
+
+                        Provides KPI cards, charts and visual insights
+                        for monitoring forecasted energy consumption.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Feature 4 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon red">
+
+                        <i class="bi bi-lightning-charge-fill"></i>
+
+                    </div>
+
+                    <h5>Peak Load Detection</h5>
+
+                    <p>
+
+                        Automatically identifies high energy demand
+                        periods for better planning and optimization.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Feature 5 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon purple">
+
+                        <i class="bi bi-lightbulb-fill"></i>
+
+                    </div>
+
+                    <h5>Smart Recommendations</h5>
+
+                    <p>
+
+                        Suggests optimal appliance usage based on
+                        predicted energy demand and load levels.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Feature 6 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon cyan">
+
+                        <i class="bi bi-bar-chart-fill"></i>
+
+                    </div>
+
+                    <h5>Model Analytics</h5>
+
+                    <p>
+
+                        Displays performance metrics, feature
+                        importance and training history for analysis.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ================= Technology Stack ================= -->
+
+<div class="card about-card mb-5">
+
+    <div class="card-body">
+
+        <div class="mb-4">
+
+            <h4 class="fw-bold">
+
+                🛠 Technology Stack
+
+            </h4>
+
+            <p class="text-muted mb-0">
+
+                Technologies and frameworks used to build the Smart Energy Forecasting System.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Frontend -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="tech-card">
+
+                    <div class="tech-icon bg-primary">
+
+                        <i class="bi bi-window"></i>
+
+                    </div>
+
+                    <h5>Frontend</h5>
+
+                    <ul>
+
+                        <li>HTML5</li>
+
+                        <li>CSS3</li>
+
+                        <li>Bootstrap 5</li>
+
+                        <li>Chart.js</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <!-- Backend -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="tech-card">
+
+                    <div class="tech-icon bg-success">
+
+                        <i class="bi bi-server"></i>
+
+                    </div>
+
+                    <h5>Backend</h5>
+
+                    <ul>
+
+                        <li>Python</li>
+
+                        <li>Flask</li>
+
+                        <li>Jinja2</li>
+
+                        <li>Pandas</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <!-- AI / ML -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="tech-card">
+
+                    <div class="tech-icon bg-warning">
+
+                        <i class="bi bi-cpu-fill"></i>
+
+                    </div>
+
+                    <h5>AI / ML</h5>
+
+                    <ul>
+
+                        <li>PyTorch</li>
+
+                        <li>LSTM</li>
+
+                        <li>NumPy</li>
+
+                        <li>Scikit-learn</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <!-- Development -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="tech-card">
+
+                    <div class="tech-icon bg-danger">
+
+                        <i class="bi bi-tools"></i>
+
+                    </div>
+
+                    <h5>Development</h5>
+
+                    <ul>
+
+                        <li>VS Code</li>
+
+                        <li>Git</li>
+
+                        <li>GitHub</li>
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ================= Workflow & Future ================= -->
+
+<div class="row g-4">
+
+    <!-- Workflow -->
+
+    <div class="col-lg-7">
+
+        <div class="card about-card h-100">
+
+            <div class="card-body">
+
+                <h4 class="fw-bold mb-4">
+
+                    🔄 Project Workflow
+
+                </h4>
+
+                <div class="workflow">
+
+                    <div class="workflow-step">
+
+                        <div class="workflow-icon bg-primary">
+
+                            <i class="bi bi-database-fill"></i>
+
+                        </div>
+
+                        <h6>Dataset</h6>
+
+                        <p>Historical Energy Consumption</p>
+
+                    </div>
+
+                    <div class="workflow-arrow">
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </div>
+
+                    <div class="workflow-step">
+
+                        <div class="workflow-icon bg-success">
+
+                            <i class="bi bi-funnel-fill"></i>
+
+                        </div>
+
+                        <h6>Preprocessing</h6>
+
+                        <p>Cleaning & Scaling</p>
+
+                    </div>
+
+                    <div class="workflow-arrow">
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </div>
+
+                    <div class="workflow-step">
+
+                        <div class="workflow-icon bg-warning">
+
+                            <i class="bi bi-cpu-fill"></i>
+
+                        </div>
+
+                        <h6>LSTM Model</h6>
+
+                        <p>Deep Learning</p>
+
+                    </div>
+
+                    <div class="workflow-arrow">
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </div>
+
+                    <div class="workflow-step">
+
+                        <div class="workflow-icon bg-danger">
+
+                            <i class="bi bi-graph-up-arrow"></i>
+
+                        </div>
+
+                        <h6>Forecast</h6>
+
+                        <p>24-Hour Prediction</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Future -->
+
+    <div class="col-lg-5">
+
+        <div class="card about-card h-100">
+
+            <div class="card-body">
+
+                <h4 class="fw-bold mb-4">
+
+                    🚀 Future Enhancements
+
+                </h4>
+
+                <div class="future-item">
+
+                    <i class="bi bi-check-circle-fill text-success"></i>
+
+                    Real-time Smart Meter Integration
+
+                </div>
+
+                <div class="future-item">
+
+                    <i class="bi bi-check-circle-fill text-success"></i>
+
+                    Weather-Based Energy Forecasting
+
+                </div>
+
+                <div class="future-item">
+
+                    <i class="bi bi-check-circle-fill text-success"></i>
+
+                    Renewable Energy Prediction
+
+                </div>
+
+                <div class="future-item">
+
+                    <i class="bi bi-check-circle-fill text-success"></i>
+
+                    IoT Sensor Integration
+
+                </div>
+
+                <div class="future-item">
+
+                    <i class="bi bi-check-circle-fill text-success"></i>
+
+                    Mobile Application Support
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 
 {% endblock %}

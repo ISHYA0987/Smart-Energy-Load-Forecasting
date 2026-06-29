@@ -1,0 +1,431 @@
+/* ===================================
+About Card
+=================================== */
+
+.about-card{
+
+    border:none;
+
+    border-radius:22px;
+
+    box-shadow:0 12px 35px rgba(15,23,42,.08);
+
+}
+
+.project-highlight{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:18px;
+
+}
+
+.project-highlight div{
+
+    background:#f8fafc;
+
+    border-radius:16px;
+
+    padding:20px;
+
+    text-align:center;
+
+    transition:.3s;
+
+}
+
+.project-highlight div:hover{
+
+    background:#eef4ff;
+
+    transform:translateY(-4px);
+
+}
+
+.project-highlight small{
+
+    color:#64748b;
+
+}
+
+.project-highlight h4{
+
+    margin-top:8px;
+
+    font-weight:700;
+
+}
+/* ===================================
+Problem Statement
+=================================== */
+
+.problem-card{
+
+    display:flex;
+
+    gap:20px;
+
+    background:#f8fafc;
+
+    padding:24px;
+
+    border-radius:18px;
+
+    height:100%;
+
+    transition:.3s;
+
+}
+
+.problem-card:hover{
+
+    background:#eef4ff;
+
+    transform:translateY(-4px);
+
+}
+
+.problem-icon{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    font-size:26px;
+
+    flex-shrink:0;
+
+}
+
+.problem-icon.danger{
+
+    background:#ef4444;
+
+}
+
+.problem-icon.success{
+
+    background:#22c55e;
+
+}
+
+.problem-card h5{
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.problem-card p{
+
+    color:#64748b;
+
+    line-height:1.7;
+
+    margin-bottom:0;
+
+}
+/* ===================================
+Key Features
+=================================== */
+
+.feature-card{
+
+    background:#f8fafc;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    text-align:center;
+
+    height:100%;
+
+    transition:.3s;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-6px);
+
+    background:#eef4ff;
+
+}
+
+.feature-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:30px;
+
+    margin:0 auto 20px;
+
+}
+
+.feature-card h5{
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+}
+
+.feature-card p{
+
+    color:#64748b;
+
+    line-height:1.6;
+
+    margin-bottom:0;
+
+}
+
+/* Feature Colors */
+
+.feature-icon.blue{
+
+    background:#2563eb;
+
+}
+
+.feature-icon.green{
+
+    background:#22c55e;
+
+}
+
+.feature-icon.orange{
+
+    background:#f59e0b;
+
+}
+
+.feature-icon.red{
+
+    background:#ef4444;
+
+}
+
+.feature-icon.purple{
+
+    background:#8b5cf6;
+
+}
+
+.feature-icon.cyan{
+
+    background:#06b6d4;
+
+}
+/* ===================================
+Technology Stack
+=================================== */
+
+.tech-card{
+
+    background:#f8fafc;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    text-align:center;
+
+    height:100%;
+
+    transition:.3s;
+
+}
+
+.tech-card:hover{
+
+    background:#eef4ff;
+
+    transform:translateY(-5px);
+
+}
+
+.tech-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:30px;
+
+    margin:0 auto 18px;
+
+}
+
+.tech-card h5{
+
+    font-weight:700;
+
+    margin-bottom:15px;
+
+}
+
+.tech-card ul{
+
+    list-style:none;
+
+    padding:0;
+
+    margin:0;
+
+}
+
+.tech-card li{
+
+    color:#64748b;
+
+    padding:6px 0;
+
+}
+/* ===================================
+Workflow
+=================================== */
+
+.workflow{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+}
+
+.workflow-step{
+
+    text-align:center;
+
+    flex:1;
+
+    min-width:120px;
+
+}
+
+.workflow-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:28px;
+
+    margin:0 auto 15px;
+
+}
+
+.workflow-step h6{
+
+    font-weight:700;
+
+}
+
+.workflow-step p{
+
+    color:#64748b;
+
+    font-size:14px;
+
+    margin:0;
+
+}
+
+.workflow-arrow{
+
+    font-size:26px;
+
+    color:#94a3b8;
+
+}
+
+/* ===================================
+Future Enhancements
+=================================== */
+
+.future-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:16px;
+
+    margin-bottom:14px;
+
+    border-radius:14px;
+
+    background:#f8fafc;
+
+    transition:.3s;
+
+}
+
+.future-item:hover{
+
+    background:#eef4ff;
+
+    transform:translateX(6px);
+
+}
+
+.future-item i{
+
+    font-size:20px;
+
+}
