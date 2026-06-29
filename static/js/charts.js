@@ -152,3 +152,68 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+// =========================
+// Doughnut Chart
+// =========================
+
+const loadCanvas = document.getElementById("loadChart");
+
+if(loadCanvas){
+
+    new Chart(loadCanvas,{
+
+        type:"doughnut",
+
+        data:{
+
+            labels:["High","Medium","Low"],
+
+            datasets:[{
+
+                data:[
+
+                    loadDistribution.high,
+
+                    loadDistribution.medium,
+
+                    loadDistribution.low
+
+                ],
+
+                backgroundColor:[
+
+                    "#ef4444",
+
+                    "#f59e0b",
+
+                    "#22c55e"
+
+                ],
+
+                borderWidth:0
+
+            }]
+
+        },
+
+        options:{
+
+            responsive:true,
+
+            cutout:"70%",
+
+            plugins:{
+
+                legend:{
+
+                    position:"bottom"
+
+                }
+
+            }
+
+        }
+
+    });
+
+}

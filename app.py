@@ -111,7 +111,129 @@ def get_peak_hours():
 
         return []
 
+def generate_ai_insights(forecast_df):
 
+    values = forecast_df["Forecast_Wh"].tolist()
+    times = forecast_df["Time"].tolist()
+
+    highest = max(values)
+    lowest = min(values)
+
+    highest_time = times[values.index(highest)]
+    lowest_time = times[values.index(lowest)]
+
+    average = sum(values) / len(values)
+
+    insights = []
+
+    # Peak Load
+    insights.append({
+        "icon": "bi-lightning-charge-fill",
+        "color": "warning",
+        "title": "Peak Load Expected",
+        "message": f"Highest demand is expected around {highest_time} ({highest:.1f} Wh)."
+    })
+
+    # Best Appliance Time
+    insights.append({
+        "icon": "bi-clock-history",
+        "color": "primary",
+        "title": "Best Time for Heavy Appliances",
+        "message": f"Use washing machines, heaters, or dishwashers near {lowest_time} when demand is lowest."
+    })
+
+    # Load Balance
+    high_hours = len([v for v in values if v > average * 1.10])
+
+    if high_hours >= 5:
+
+        status = "High"
+
+        msg = "Several high-load periods are predicted today. Consider shifting heavy appliance usage."
+
+    elif high_hours >= 3:
+
+        status = "Moderate"
+
+        msg = "Energy demand is balanced with a few peak periods."
+
+    else:
+
+        status = "Low"
+
+        msg = "Energy demand remains stable throughout the day."
+
+    insights.append({
+        "icon": "bi-bar-chart-line-fill",
+        "color": "success",
+        "title": "Load Analysis",
+        "message": msg
+    })
+
+    # Savings Estimate
+    saving = round((highest-average)/highest*100,1)
+
+    insights.append({
+        "icon":"bi-stars",
+        "color":"success",
+        "title":"Estimated Saving",
+        "message":f"Scheduling heavy appliances during low-load periods may reduce consumption by approximately {saving}%."
+    })
+
+    return insights
+
+def get_peak_hour_details(forecast_df):
+
+    top = forecast_df.nlargest(5, "Forecast_Wh")
+
+    peak_hours = []
+
+    for _, row in top.iterrows():
+
+        peak_hours.append({
+
+            "time": row["Time"],
+
+            "load": round(row["Forecast_Wh"], 2),
+
+            "status": "High"
+
+        })
+
+    return peak_hours
+
+
+def get_appliance_schedule(forecast_df):
+
+    low = forecast_df.nsmallest(4, "Forecast_Wh")
+
+    appliances = [
+
+        "Washing Machine",
+
+        "Dishwasher",
+
+        "Water Heater",
+
+        "EV Charging"
+
+    ]
+
+    schedule = []
+
+    for appliance, (_, row) in zip(appliances, low.iterrows()):
+
+        schedule.append({
+
+            "appliance": appliance,
+
+            "time": row["Time"],
+
+            "load": round(row["Forecast_Wh"],2)
+
+        })
+
+    return schedule
 
 
 @app.route("/")
@@ -123,11 +245,14 @@ def dashboard():
     values = forecast_df["Forecast_Wh"].tolist()
 
     recommendations = get_recommendations()
-    peak_hours = get_peak_hours()
+    ai_insights = generate_ai_insights(forecast_df)
+    peak_hours = get_peak_hour_details(forecast_df)
+
+    appliance_schedule = get_appliance_schedule(forecast_df)
 
     metrics = get_metrics()
 
-    # ---------------- Dashboard Statistics ---------------- #
+   
 
     next_prediction = round(values[0], 2)
     next_time = times[0]
@@ -159,19 +284,21 @@ def dashboard():
 
         "index.html",
 
-        # Existing Data
+        
         times=times,
         values=values,
         peak_hours=peak_hours,
+        appliance_schedule=appliance_schedule,
         recommendations=recommendations,
+        ai_insights=ai_insights,
 
-        # KPI Cards
+        
         next_prediction=next_prediction,
         next_time=next_time,
         total_energy=total_energy,
         high_count=high_count,
 
-        # Forecast Summary
+        
         highest=round(highest,2),
         highest_time=highest_time,
 
@@ -180,16 +307,16 @@ def dashboard():
 
         average=average,
 
-        # Doughnut Chart
+        
         high_load=high_count,
         medium_load=medium_count,
         low_load=low_count,
 
-        # Model
+        
         model_name="LSTM",
         sequence_length=12,
 
-        # Metrics
+        
         metrics=metrics
 
     )

@@ -35,6 +35,7 @@
 
 
 
+
 .chart-card{
 
     border-radius:22px;
@@ -70,7 +71,13 @@
 
 
 
+.forecast-chart-container canvas{
 
+    width: 100% !important;
+
+    height: 100% !important;
+
+}
 
 
 .forecast-chart-container{
@@ -82,6 +89,7 @@
     height:300px;
 
 }
+
 
 
 .summary-card{
@@ -133,5 +141,112 @@
 .summary-card h5{
 
     font-weight:700;
+
+}
+
+.doughnut-container{
+
+    height:280px;
+
+    position:relative;
+
+}
+
+
+
+.insight-card{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:18px;
+
+    padding:18px;
+
+    margin-bottom:18px;
+
+    border-radius:16px;
+
+    background:#f8fafc;
+
+    transition:.3s;
+
+}
+
+.insight-card:hover{
+
+    background:#eef4ff;
+
+    transform:translateX(6px);
+
+}
+
+.insight-card i{
+
+    font-size:30px;
+
+}
+
+.insight-card h6{
+
+    font-weight:700;
+
+    margin-bottom:5px;
+
+}
+
+.insight-card p{
+
+    margin:0;
+
+    color:#64748b;
+
+}
+/* ======================================
+Peak Cards
+====================================== */
+
+.peak-card{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px;
+
+    margin-bottom:15px;
+
+    border-radius:16px;
+
+    background:#f8fafc;
+
+    transition:.3s;
+
+}
+
+.peak-card:hover{
+
+    background:#eef4ff;
+
+    transform:translateX(6px);
+
+}
+
+.peak-card h5{
+
+    margin:0;
+
+    font-size:17px;
+
+    font-weight:600;
+
+}
+
+.peak-card small{
+
+    font-size:13px;
 
 }

@@ -20,29 +20,29 @@ AI Powered Smart Energy Consumption Forecasting
 
 <div class="d-flex justify-content-between align-items-center mb-4">
 
+<div class="dashboard-header">
+
     <div>
 
         <h3 class="fw-bold mb-1">
             Welcome Back 👋
         </h3>
 
-        <p class="text-muted mb-0">
+        <p class="text-muted">
             Here's today's energy forecast overview.
         </p>
 
     </div>
 
-    <div>
+    <span class="badge bg-success dashboard-status">
 
-        <span class="badge bg-success fs-6 p-2">
+        <i class="bi bi-check-circle-fill"></i>
 
-            <i class="bi bi-check-circle-fill"></i>
+        Forecast Updated
 
-            Forecast Updated
+    </span>
 
-        </span>
-
-    </div>
+</div>
 
 </div>
 
@@ -537,6 +537,194 @@ AI Powered Smart Energy Consumption Forecasting
     </div>
 
 </div>
+<!-- ================= Load Distribution ================= -->
+
+<div class="row mt-4 g-4">
+
+    <!-- Doughnut Chart -->
+
+    <div class="col-lg-5">
+
+        <div class="card h-100">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <div>
+
+                        <h4 class="fw-bold">
+
+                            <i class="bi bi-pie-chart-fill text-primary"></i>
+
+                            Load Distribution
+
+                        </h4>
+
+                        <small class="text-muted">
+
+                            Forecast classification
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="doughnut-container">
+
+                    <canvas id="loadChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- AI Recommendation -->
+
+    <div class="col-lg-7">
+
+        <div class="card h-100">
+
+    <div class="card-body">
+
+        <h4 class="fw-bold mb-4">
+
+            🤖 AI Energy Insights
+
+        </h4>
+
+        {% for insight in ai_insights %}
+
+        <div class="insight-card">
+
+            <i class="bi {{ insight.icon }} text-{{ insight.color }}"></i>
+
+            <div>
+
+                <h6>{{ insight.title }}</h6>
+
+                <p>{{ insight.message }}</p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+        </div> <!-- card-body -->
+
+
+
+<!-- ================= Peak Hours ================= -->
+
+<div class="row mt-4 g-4">
+
+    <!-- Peak Hours -->
+
+    <div class="col-lg-6">
+
+        <div class="card h-100">
+
+            <div class="card-body">
+
+                <h4 class="fw-bold mb-4">
+
+                    🔥 Peak Hours
+
+                </h4>
+
+                {% for peak in peak_hours %}
+
+                <div class="peak-card">
+
+                    <div>
+
+                        <h5>{{ peak.time }}</h5>
+
+                        <small class="text-muted">
+
+                            {{ peak.load }} Wh
+
+                        </small>
+
+                    </div>
+
+                    <span class="badge bg-danger">
+
+                        {{ peak.status }}
+
+                    </span>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Appliance Schedule -->
+
+    <div class="col-lg-6">
+
+        <div class="card h-100">
+
+            <div class="card-body">
+
+                <h4 class="fw-bold mb-4">
+
+                    ⚡ Appliance Schedule
+
+                </h4>
+
+                {% for item in appliance_schedule %}
+
+                <div class="peak-card">
+
+                    <div>
+
+                        <h5>
+
+                            {{ item.appliance }}
+
+                        </h5>
+
+                        <small class="text-muted">
+
+                            {{ item.time }}
+
+                        </small>
+
+                    </div>
+
+                    <span class="badge bg-success">
+
+                        Low Load
+
+                    </span>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 {% endblock %}
 
 {% block scripts %}
@@ -545,10 +733,20 @@ AI Powered Smart Energy Consumption Forecasting
 const labels = {{ times|tojson }};
 const values = {{ values|tojson }};
 const average = {{ average }};
+const loadDistribution = {
+
+    high: {{ high_load }},
+
+    medium: {{ medium_load }},
+
+    low: {{ low_load }}
+
+};
 </script>
 
 <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
 
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
 
 {% endblock %}
