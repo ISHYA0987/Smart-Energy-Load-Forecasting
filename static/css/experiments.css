@@ -1,0 +1,241 @@
+/* ===================================
+Best Model Card
+=================================== */
+
+.best-model-card{
+
+    border:none;
+
+    border-radius:22px;
+
+    box-shadow:0 12px 35px rgba(15,23,42,.08);
+
+}
+
+.best-model-card .badge{
+
+    font-size:.9rem;
+
+}
+
+.best-score{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:18px;
+
+}
+
+.best-score div{
+
+    background:#f8fafc;
+
+    padding:18px;
+
+    border-radius:14px;
+
+    text-align:center;
+
+    transition:.3s;
+
+}
+
+.best-score div:hover{
+
+    background:#eef4ff;
+
+    transform:translateY(-3px);
+
+}
+
+.best-score small{
+
+    color:#64748b;
+
+}
+
+.best-score h4{
+
+    margin-top:6px;
+
+    font-weight:700;
+
+}
+/* ===================================
+Experiment Table
+=================================== */
+
+.experiment-table-card{
+
+    border:none;
+
+    border-radius:22px;
+
+    box-shadow:0 12px 35px rgba(15,23,42,.08);
+
+}
+
+.experiment-table{
+
+    border-collapse:separate;
+
+    border-spacing:0 10px;
+
+}
+
+.experiment-table thead th{
+
+    border:none;
+
+    color:#64748b;
+
+    font-weight:600;
+
+    padding-bottom:14px;
+
+}
+
+.experiment-table tbody tr{
+
+    background:#fff;
+
+    transition:.3s;
+
+}
+
+.experiment-table tbody tr:hover{
+
+    background:#f8fbff;
+
+    transform:translateY(-2px);
+
+}
+
+.experiment-table td{
+
+    padding:18px;
+
+    border:none;
+
+}
+
+.best-row{
+
+    background:#eef8ff !important;
+
+    border-left:5px solid #22c55e;
+
+}
+
+.best-row td:first-child{
+
+    font-weight:700;
+
+}
+/* ===================================
+Key Findings
+=================================== */
+
+.findings-card{
+
+    border:none;
+
+    border-radius:22px;
+
+    box-shadow:0 12px 35px rgba(15,23,42,.08);
+
+}
+
+.finding-item{
+
+    display:flex;
+
+    gap:18px;
+
+    align-items:flex-start;
+
+    background:#f8fafc;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    height:100%;
+
+    transition:.3s;
+
+}
+
+.finding-item:hover{
+
+    background:#eef4ff;
+
+    transform:translateY(-4px);
+
+}
+
+.finding-icon{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:22px;
+
+    flex-shrink:0;
+
+}
+
+.finding-icon.success{
+
+    background:#22c55e;
+
+}
+
+.finding-icon.warning{
+
+    background:#f59e0b;
+
+}
+
+.finding-icon.primary{
+
+    background:#2563eb;
+
+}
+
+.finding-icon.danger{
+
+    background:#ef4444;
+
+}
+
+.finding-item h6{
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.finding-item p{
+
+    margin:0;
+
+    color:#64748b;
+
+    line-height:1.6;
+
+}

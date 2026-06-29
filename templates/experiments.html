@@ -1,42 +1,377 @@
 {% extends "base.html" %}
+
+{% block title %}Experiments{% endblock %}
+
+{% block styles %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/experiments.css') }}">
+
+{% endblock %}
+
 {% block page_title %}
-Model Overview
+Experiments
 {% endblock %}
 
 {% block subtitle %}
-Deep learning architecture and training configuration.
+Compare different LSTM configurations and forecasting performance.
 {% endblock %}
 
 {% block content %}
 
+<!-- ================= Best Experiment ================= -->
 
+<div class="card best-model-card mb-5">
 
-<table class="table table-striped">
+    <div class="card-body">
 
-<tr>
+        <div class="row align-items-center">
 
-<th>Model</th>
-<th>Seq Length</th>
-<th>MAE</th>
-<th>RMSE</th>
-<th>R²</th>
+            <div class="col-lg-8">
 
-</tr>
+                <span class="badge bg-success mb-3">
 
-{% for row in experiments %}
+                    🏆 Best Performing Model
 
-<tr>
+                </span>
 
-<td>{{ row[0] }}</td>
-<td>{{ row[1] }}</td>
-<td>{{ row[2] }}</td>
-<td>{{ row[3] }}</td>
-<td>{{ row[4] }}</td>
+                <h2 class="fw-bold">
 
-</tr>
+                    Seq12 (Best)
 
-{% endfor %}
+                </h2>
 
-</table>
+                <p class="text-muted">
 
+                    The Seq12 configuration achieved the best forecasting
+                    performance among all experiments and was selected
+                    as the final production model.
+
+                </p>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="best-score">
+
+                    <div>
+
+                        <small>Sequence Length</small>
+
+                        <h4>12</h4>
+
+                    </div>
+
+                    <div>
+
+                        <small>MAE</small>
+
+                        <h4>0.0244</h4>
+
+                    </div>
+
+                    <div>
+
+                        <small>RMSE</small>
+
+                        <h4>0.0544</h4>
+
+                    </div>
+
+                    <div>
+
+                        <small>R² Score</small>
+
+                        <h4>0.5905</h4>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ================= Experiment Comparison ================= -->
+
+<div class="card experiment-table-card mb-5">
+
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+
+                <h4 class="fw-bold mb-1">
+
+                    📋 Experiment Comparison
+
+                </h4>
+
+                <p class="text-muted mb-0">
+
+                    Comparison of different LSTM configurations and forecasting performance.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table experiment-table align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Experiment</th>
+
+                        <th>Sequence</th>
+
+                        <th>MAE</th>
+
+                        <th>RMSE</th>
+
+                        <th>R² Score</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for exp in experiments %}
+
+                    <tr {% if "Best" in exp[0] %}class="best-row"{% endif %}>
+
+                        <td>
+
+                            {% if "Best" in exp[0] %}
+
+                                ⭐ <strong>{{ exp[0] }}</strong>
+
+                            {% else %}
+
+                                {{ exp[0] }}
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {{ exp[1] }}
+
+                        </td>
+
+                        <td>
+
+                            {{ "%.4f"|format(exp[2]) }}
+
+                        </td>
+
+                        <td>
+
+                            {{ "%.4f"|format(exp[3]) }}
+
+                        </td>
+
+                        <td>
+
+                            {{ "%.4f"|format(exp[4]) }}
+
+                        </td>
+
+                        <td>
+
+                            {% if "Best" in exp[0] %}
+
+                                <span class="badge bg-success">
+
+                                    Production Ready
+
+                                </span>
+
+                            {% elif exp[0] == "Seq48" %}
+
+                                <span class="badge bg-warning text-dark">
+
+                                    Tested
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-secondary">
+
+                                    Completed
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ================= Key Findings ================= -->
+
+<div class="card findings-card">
+
+    <div class="card-body">
+
+        <div class="mb-4">
+
+            <h4 class="fw-bold">
+
+                🔍 Key Findings
+
+            </h4>
+
+            <p class="text-muted mb-0">
+
+                Major observations from the experimentation process.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Finding 1 -->
+
+            <div class="col-lg-6">
+
+                <div class="finding-item">
+
+                    <div class="finding-icon success">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h6>Multiple Configurations Evaluated</h6>
+
+                        <p>
+
+                            Tested baseline, reduced feature set and multiple sequence lengths to identify the most effective forecasting model.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Finding 2 -->
+
+            <div class="col-lg-6">
+
+                <div class="finding-item">
+
+                    <div class="finding-icon warning">
+
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h6>Longer Sequence ≠ Better Performance</h6>
+
+                        <p>
+
+                            Increasing the sequence length to 48 did not improve forecasting accuracy and introduced additional model complexity.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Finding 3 -->
+
+            <div class="col-lg-6">
+
+                <div class="finding-item">
+
+                    <div class="finding-icon primary">
+
+                        <i class="bi bi-bar-chart-fill"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h6>Best Accuracy Achieved</h6>
+
+                        <p>
+
+                            Sequence length 12 produced the lowest MAE and RMSE while achieving the highest R² score among all experiments.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Finding 4 -->
+
+            <div class="col-lg-6">
+
+                <div class="finding-item">
+
+                    <div class="finding-icon danger">
+
+                        <i class="bi bi-award-fill"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h6>Final Model Selection</h6>
+
+                        <p>
+
+                            The Seq12 configuration was selected as the production model because it provided the best balance between prediction accuracy and computational efficiency.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 {% endblock %}
