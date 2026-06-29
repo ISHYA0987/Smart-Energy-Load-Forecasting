@@ -117,41 +117,82 @@ def get_peak_hours():
 @app.route("/")
 def dashboard():
 
-    forecast_df, forecast_records = (
-        get_forecast_data()
+    forecast_df, forecast_records = get_forecast_data()
+
+    times = forecast_df["Time"].tolist()
+    values = forecast_df["Forecast_Wh"].tolist()
+
+    recommendations = get_recommendations()
+    peak_hours = get_peak_hours()
+
+    metrics = get_metrics()
+
+    # ---------------- Dashboard Statistics ---------------- #
+
+    next_prediction = round(values[0], 2)
+    next_time = times[0]
+
+    highest = max(values)
+    highest_time = times[values.index(highest)]
+
+    lowest = min(values)
+    lowest_time = times[values.index(lowest)]
+
+    average = round(sum(values) / len(values), 2)
+
+    total_energy = round(sum(values) / 1000, 2)     # kWh
+
+    high_count = len(
+        [v for v in values if v > average * 1.10]
     )
 
-    times = forecast_df[
-        "Time"
-    ].tolist()
-
-    values = forecast_df[
-        "Forecast_Wh"
-    ].tolist()
-
-    recommendations = (
-        get_recommendations()
+    medium_count = len(
+        [v for v in values
+         if average * 0.90 <= v <= average * 1.10]
     )
 
-    peak_hours = (
-        get_peak_hours()
+    low_count = len(
+        [v for v in values if v < average * 0.90]
     )
 
     return render_template(
 
         "index.html",
 
+        # Existing Data
+        times=times,
+        values=values,
+        peak_hours=peak_hours,
         recommendations=recommendations,
 
-        peak_hours=peak_hours,
+        # KPI Cards
+        next_prediction=next_prediction,
+        next_time=next_time,
+        total_energy=total_energy,
+        high_count=high_count,
 
-        times=times,
+        # Forecast Summary
+        highest=round(highest,2),
+        highest_time=highest_time,
 
-        values=values
+        lowest=round(lowest,2),
+        lowest_time=lowest_time,
+
+        average=average,
+
+        # Doughnut Chart
+        high_load=high_count,
+        medium_load=medium_count,
+        low_load=low_count,
+
+        # Model
+        model_name="LSTM",
+        sequence_length=12,
+
+        # Metrics
+        metrics=metrics
 
     )
-
-
 
 @app.route("/forecast")
 def forecast():

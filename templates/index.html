@@ -1,40 +1,106 @@
 {% extends "base.html" %}
 
+{% block title %}Dashboard{% endblock %}
+
+{% block page_title %}
+Energy Dashboard
+{% endblock %}
+{% block styles %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block subtitle %}
+AI Powered Smart Energy Consumption Forecasting
+{% endblock %}
+
 {% block content %}
 
-<h1 class="text-center mb-4">
-⚡ Smart Energy Consumption Dashboard
-</h1>
+<!-- Dashboard Header -->
 
-<div class="card p-4 mb-4">
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-    <h3>
-        📈 24 Hour Forecast
-    </h3>
+    <div>
 
-    <canvas id="forecastChart"></canvas>
+        <h3 class="fw-bold mb-1">
+            Welcome Back 👋
+        </h3>
+
+        <p class="text-muted mb-0">
+            Here's today's energy forecast overview.
+        </p>
+
+    </div>
+
+    <div>
+
+        <span class="badge bg-success fs-6 p-2">
+
+            <i class="bi bi-check-circle-fill"></i>
+
+            Forecast Updated
+
+        </span>
+
+    </div>
 
 </div>
 
-<div class="row">
 
-    <div class="col-md-4">
 
-        <div class="card h-100">
+<!-- KPI Cards -->
+
+<div class="row g-4">
+
+    <!-- Card 1 -->
+
+    <div class="col-xl col-lg-4 col-md-6">
+
+        <div class="card">
 
             <div class="card-body">
 
-                <h4>
-                    🔴 Peak Hours
-                </h4>
+                <div class="d-flex justify-content-between">
 
-                <ul>
+                    <div>
 
-                    {% for hour in peak_hours %}
-                    <li>{{ hour }}</li>
-                    {% endfor %}
+                        <div class="metric-title">
 
-                </ul>
+                            Next Prediction
+
+                        </div>
+
+                        <div
+                        class="metric-value counter"
+                        data-target="{{ next_prediction }}">
+
+                            0
+
+                        </div>
+
+                        <div class="metric-sub">
+
+                            {{ next_time }}
+
+                        </div>
+
+                    </div>
+
+                    <div class="metric-icon blue">
+
+                        <i class="bi bi-lightning-fill"></i>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <span class="badge bg-primary">
+
+                    ▲ Stable
+
+                </span>
 
             </div>
 
@@ -42,23 +108,229 @@
 
     </div>
 
-    <div class="col-md-8">
 
-        <div class="card h-100">
+
+    <!-- Card 2 -->
+
+    <div class="col-xl col-lg-4 col-md-6">
+
+        <div class="card">
 
             <div class="card-body">
 
-                <h4>
-                    💡 Recommendations
-                </h4>
+                <div class="d-flex justify-content-between">
 
-                <ul>
+                    <div>
 
-                    {% for rec in recommendations %}
-                    <li>{{ rec }}</li>
-                    {% endfor %}
+                        <div class="metric-title">
 
-                </ul>
+                            Daily Energy
+
+                        </div>
+
+                        <div
+                        class="metric-value counter"
+                        data-target="{{ total_energy }}">
+
+                            0
+
+                        </div>
+
+                        <div class="metric-sub">
+
+                            kWh
+
+                        </div>
+
+                    </div>
+
+                    <div class="metric-icon green">
+
+                        <i class="bi bi-battery-charging"></i>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <span class="badge bg-success">
+
+                    ▲ Efficient
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Card 3 -->
+
+    <div class="col-xl col-lg-4 col-md-6">
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between">
+
+                    <div>
+
+                        <div class="metric-title">
+
+                            High Load Hours
+
+                        </div>
+
+                        <div
+                        class="metric-value counter"
+                        data-target="{{ high_count }}">
+
+                            0
+
+                        </div>
+
+                        <div class="metric-sub">
+
+                            Today
+
+                        </div>
+
+                    </div>
+
+                    <div class="metric-icon orange">
+
+                        <i class="bi bi-graph-up-arrow"></i>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <span class="badge bg-warning text-dark">
+
+                    Peak Hours
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Card 4 -->
+
+    <div class="col-xl col-lg-4 col-md-6">
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between">
+
+                    <div>
+
+                        <div class="metric-title">
+
+                            Average Load
+
+                        </div>
+
+                        <div
+                        class="metric-value counter"
+                        data-target="{{ average }}">
+
+                            0
+
+                        </div>
+
+                        <div class="metric-sub">
+
+                            Wh
+
+                        </div>
+
+                    </div>
+
+                    <div class="metric-icon red">
+
+                        <i class="bi bi-speedometer2"></i>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <span class="badge bg-danger">
+
+                    Monitoring
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Card 5 -->
+
+    <div class="col-xl col-lg-4 col-md-6">
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between">
+
+                    <div>
+
+                        <div class="metric-title">
+
+                            AI Model
+
+                        </div>
+
+                        <div class="metric-value">
+
+                            {{ model_name }}
+
+                        </div>
+
+                        <div class="metric-sub">
+
+                            Sequence {{ sequence_length }}
+
+                        </div>
+
+                    </div>
+
+                    <div class="metric-icon purple">
+
+                        <i class="bi bi-cpu-fill"></i>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <span class="badge bg-info">
+
+                    Ready
+
+                </span>
 
             </div>
 
@@ -68,49 +340,215 @@
 
 </div>
 
+<br>
+
+<!-- ================= Forecast Chart ================= -->
+
+<!-- ================= HERO SECTION ================= -->
+
+<div class="row mt-4 g-4">
+
+    <!-- Forecast Chart -->
+
+    <div class="col-lg-8">
+
+        <div class="card chart-card h-100">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <div>
+
+                        <h4 class="fw-bold mb-1">
+
+                            <i class="bi bi-graph-up-arrow text-primary"></i>
+
+                            24 Hour Energy Forecast
+
+                        </h4>
+
+                        <small class="text-muted">
+
+                            AI Predicted Energy Consumption
+
+                        </small>
+
+                    </div>
+
+                    <span class="badge bg-primary">
+
+                        Live Forecast
+
+                    </span>
+
+                </div>
+
+                <div class="forecast-chart-container">
+
+                    <canvas id="forecastChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Summary -->
+
+    <div class="col-lg-4">
+
+        <div class="card h-100">
+
+            <div class="card-body">
+
+                <h4 class="fw-bold mb-4">
+
+                    <i class="bi bi-bar-chart-fill text-success"></i>
+
+                    Forecast Summary
+
+                </h4>
+
+                <!-- Highest -->
+
+                <div class="summary-card mb-3">
+
+                    <div class="summary-icon bg-danger">
+
+                        <i class="bi bi-arrow-up"></i>
+
+                    </div>
+
+                    <div>
+
+                        <small class="text-muted">
+
+                            Highest Consumption
+
+                        </small>
+
+                        <h5 class="mb-0">
+
+                            {{ highest }} Wh
+
+                        </h5>
+
+                        <small>{{ highest_time }}</small>
+
+                    </div>
+
+                </div>
+
+                <!-- Lowest -->
+
+                <div class="summary-card mb-3">
+
+                    <div class="summary-icon bg-success">
+
+                        <i class="bi bi-arrow-down"></i>
+
+                    </div>
+
+                    <div>
+
+                        <small class="text-muted">
+
+                            Lowest Consumption
+
+                        </small>
+
+                        <h5 class="mb-0">
+
+                            {{ lowest }} Wh
+
+                        </h5>
+
+                        <small>{{ lowest_time }}</small>
+
+                    </div>
+
+                </div>
+
+                <!-- Average -->
+
+                <div class="summary-card mb-3">
+
+                    <div class="summary-icon bg-primary">
+
+                        <i class="bi bi-speedometer2"></i>
+
+                    </div>
+
+                    <div>
+
+                        <small class="text-muted">
+
+                            Average Load
+
+                        </small>
+
+                        <h5 class="mb-0">
+
+                            {{ average }} Wh
+
+                        </h5>
+
+                    </div>
+
+                </div>
+
+                <!-- Energy -->
+
+                <div class="summary-card">
+
+                    <div class="summary-icon bg-warning">
+
+                        <i class="bi bi-lightning-charge-fill"></i>
+
+                    </div>
+
+                    <div>
+
+                        <small class="text-muted">
+
+                            Total Energy
+
+                        </small>
+
+                        <h5 class="mb-0">
+
+                            {{ total_energy }} kWh
+
+                        </h5>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 {% endblock %}
 
 {% block scripts %}
 
 <script>
-
 const labels = {{ times|tojson }};
 const values = {{ values|tojson }};
-
-const ctx =
-document.getElementById(
-'forecastChart'
-);
-
-new Chart(ctx, {
-
-    type: 'line',
-
-    data: {
-
-        labels: labels,
-
-        datasets: [{
-
-            label: 'Forecast (Wh)',
-
-            data: values,
-
-            borderColor: 'rgb(54,162,235)',
-
-            backgroundColor:
-            'rgba(54,162,235,0.2)',
-
-            fill: true,
-
-            tension: 0.3
-
-        }]
-
-    }
-
-});
-
+const average = {{ average }};
 </script>
+
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
 {% endblock %}
