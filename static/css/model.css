@@ -1,0 +1,734 @@
+/* ===============================
+Hero
+=============================== */
+
+.model-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.model-header h2{
+
+    font-weight:700;
+
+}
+
+.model-header p{
+
+    color:#64748b;
+
+    margin-top:8px;
+
+}
+
+/* ===============================
+Info Cards
+=============================== */
+
+.info-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+
+    transition:.3s;
+
+}
+
+.info-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.info-card i{
+
+    font-size:34px;
+
+    color:#2563eb;
+
+    margin-bottom:18px;
+
+}
+
+.info-card h6{
+
+    color:#64748b;
+
+}
+
+.info-card h3{
+
+    font-weight:700;
+
+}
+
+/* ===============================
+Section Title
+=============================== */
+
+.section-title{
+
+    font-size:26px;
+
+    font-weight:700;
+
+}
+
+/* ===============================
+Performance Cards
+=============================== */
+
+.metric-box{
+
+    background:#f8fafc;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    text-align:center;
+
+    transition:.3s;
+
+}
+
+.metric-box:hover{
+
+    background:#eef4ff;
+
+}
+
+.metric-box h6{
+
+    color:#64748b;
+
+}
+
+.metric-box h2{
+
+    font-size:42px;
+
+    font-weight:700;
+
+    color:#2563eb;
+
+}
+
+.metric-box small{
+
+    color:#94a3b8;
+
+}
+/* =====================================
+Architecture
+===================================== */
+
+.architecture{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.layer{
+
+    width:320px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.layer:hover{
+
+    transform:translateY(-6px) scale(1.02);
+
+}
+
+.layer i{
+
+    font-size:34px;
+
+    margin-bottom:12px;
+
+}
+
+.layer h5{
+
+    font-weight:700;
+
+    margin-bottom:5px;
+
+}
+
+.layer p{
+
+    color:#64748b;
+
+    margin:0;
+
+}
+
+/* Different colors */
+
+.input-layer{
+
+    border-left:6px solid #2563eb;
+
+}
+
+.lstm-layer{
+
+    border-left:6px solid #8b5cf6;
+
+}
+
+.dropout-layer{
+
+    border-left:6px solid #f59e0b;
+
+}
+
+.dense-layer{
+
+    border-left:6px solid #22c55e;
+
+}
+
+.output-layer{
+
+    border-left:6px solid #ef4444;
+
+}
+
+/* Connector */
+
+.connector{
+
+    width:4px;
+
+    height:45px;
+
+    background:#cbd5e1;
+
+    position:relative;
+
+}
+
+.connector::after{
+
+    content:"▼";
+
+    position:absolute;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    bottom:-18px;
+
+    color:#64748b;
+
+    font-size:18px;
+
+}
+/* ===================================
+Neural Network
+=================================== */
+
+.network{
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+}
+
+.network-column{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+.network-column h5{
+
+    font-weight:700;
+
+}
+
+.network-column small{
+
+    color:#64748b;
+
+    margin-bottom:20px;
+
+}
+
+.nodes{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.node{
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    transition:.4s;
+
+    animation:pulse 2s infinite;
+
+}
+
+.input-node{
+
+    background:#2563eb;
+
+}
+
+.lstm-node{
+
+    background:#8b5cf6;
+
+}
+
+.dense-node{
+
+    background:#22c55e;
+
+}
+
+.output-node{
+
+    background:#ef4444;
+
+    width:24px;
+
+    height:24px;
+
+}
+
+.connection{
+
+    width:90px;
+
+    height:4px;
+
+    background:#cbd5e1;
+
+    position:relative;
+
+}
+
+.connection::after{
+
+    content:"▶";
+
+    position:absolute;
+
+    right:-12px;
+
+    top:-11px;
+
+    color:#64748b;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(1);
+
+opacity:.8;
+
+}
+
+50%{
+
+transform:scale(1.2);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scale(1);
+
+opacity:.8;
+
+}
+
+}
+/* ===================================
+Pipeline
+=================================== */
+
+.pipeline{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+}
+
+.pipeline-step{
+
+    flex:1;
+
+    min-width:130px;
+
+    text-align:center;
+
+}
+
+.pipeline-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:30px;
+
+    margin-bottom:15px;
+
+    transition:.3s;
+
+}
+
+.pipeline-icon:hover{
+
+    transform:scale(1.1);
+
+}
+
+.pipeline-arrow{
+
+    width:40px;
+
+    height:4px;
+
+    background:#cbd5e1;
+
+    position:relative;
+
+}
+
+.pipeline-arrow::after{
+
+    content:"▶";
+
+    position:absolute;
+
+    right:-10px;
+
+    top:-10px;
+
+    color:#64748b;
+
+}
+
+/* Bootstrap doesn't provide these */
+
+.bg-purple{
+
+    background:#8b5cf6;
+
+}
+
+/* ===================================
+Configuration
+=================================== */
+
+.config-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:16px 0;
+
+    border-bottom:1px solid #eef2f7;
+
+}
+
+.config-item:last-child{
+
+    border-bottom:none;
+
+}
+
+.config-item span{
+
+    color:#64748b;
+
+}
+
+.config-item strong{
+
+    color:#111827;
+
+}
+/* ===================================
+Architecture Flow
+=================================== */
+
+.architecture-flow{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+.architecture-block{
+
+    width:320px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    text-align:center;
+
+    margin-bottom:10px;
+
+    box-shadow:0 10px 25px rgba(15,23,42,.08);
+
+    transition:.3s;
+
+    border-left:6px solid transparent;
+
+}
+
+.architecture-block:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.architecture-block h5{
+
+    margin-top:12px;
+
+    font-weight:700;
+
+}
+
+.architecture-block p{
+
+    color:#64748b;
+
+    margin-bottom:0;
+
+}
+
+.block-icon{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    margin:auto;
+
+    font-size:28px;
+
+}
+
+.input{
+
+    border-left-color:#2563eb;
+
+}
+
+.input .block-icon{
+
+    background:#2563eb;
+
+}
+
+.lstm{
+
+    border-left-color:#8b5cf6;
+
+}
+
+.lstm .block-icon{
+
+    background:#8b5cf6;
+
+}
+
+.dropout{
+
+    border-left-color:#f59e0b;
+
+}
+
+.dropout .block-icon{
+
+    background:#f59e0b;
+
+}
+
+.dense{
+
+    border-left-color:#22c55e;
+
+}
+
+.dense .block-icon{
+
+    background:#22c55e;
+
+}
+
+.output{
+
+    border-left-color:#ef4444;
+
+}
+
+.output .block-icon{
+
+    background:#ef4444;
+
+}
+
+.flow-arrow{
+
+    font-size:28px;
+
+    color:#94a3b8;
+
+    margin:6px 0;
+
+}
+/* ===================================
+Training Cards
+=================================== */
+
+.training-card{
+
+    background:#f8fafc;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    text-align:center;
+
+    transition:.3s;
+
+    height:100%;
+
+}
+
+.training-card:hover{
+
+    transform:translateY(-5px);
+
+    background:#eef4ff;
+
+}
+
+.training-card i{
+
+    font-size:34px;
+
+    color:#2563eb;
+
+    margin-bottom:12px;
+
+}
+
+.training-card h6{
+
+    color:#64748b;
+
+}
+
+.training-card h3{
+
+    font-weight:700;
+
+}

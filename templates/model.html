@@ -1,0 +1,454 @@
+{% extends "base.html" %}
+
+{% block title %}Model{% endblock %}
+
+{% block page_title %}
+Model Overview
+{% endblock %}
+
+{% block subtitle %}
+Deep Learning Model for Smart Energy Consumption Forecasting
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/model.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= Hero ================= -->
+
+<div class="model-header">
+
+    <div>
+
+        <h2>
+            🧠 LSTM Forecasting Model
+        </h2>
+
+        <p>
+
+            Long Short-Term Memory based deep learning model
+            for 24-hour smart energy forecasting.
+
+        </p>
+
+    </div>
+
+    <span class="badge bg-success">
+
+        Production Ready
+
+    </span>
+
+</div>
+
+
+
+<!-- ================= Model Info ================= -->
+
+<div class="row g-4 mt-2">
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="info-card">
+
+            <i class="bi bi-cpu-fill"></i>
+
+            <h6>Model</h6>
+
+            <h3>{{ model.name }}</h3>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="info-card">
+
+            <i class="bi bi-layers-fill"></i>
+
+            <h6>Sequence Length</h6>
+
+            <h3>{{ model.sequence }}</h3>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="info-card">
+
+            <i class="bi bi-clock-history"></i>
+
+            <h6>Forecast Horizon</h6>
+
+            <h3>{{ model.forecast }}</h3>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="info-card">
+
+            <i class="bi bi-database-fill"></i>
+
+            <h6>Dataset</h6>
+
+            <h3>{{ model.dataset }}</h3>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= Performance ================= -->
+
+<div class="card mt-5">
+
+    <div class="card-body">
+
+        <div class="section-title">
+
+            📊 Model Performance
+
+        </div>
+
+        <div class="row g-4 mt-2">
+
+            <div class="col-md-4">
+
+                <div class="metric-box">
+
+                    <h6>MAE</h6>
+
+                    <h2>{{ metrics.mae }}</h2>
+
+                    <small>Mean Absolute Error</small>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="metric-box">
+
+                    <h6>RMSE</h6>
+
+                    <h2>{{ metrics.rmse }}</h2>
+
+                    <small>Root Mean Squared Error</small>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="metric-box">
+
+                    <h6>R² Score</h6>
+
+                    <h2>{{ metrics.r2 }}</h2>
+
+                    <small>Coefficient of Determination</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ================= Architecture ================= -->
+
+<div class="row mt-5 g-4">
+
+    <!-- Architecture -->
+
+    <div class="col-lg-8">
+
+        <div class="card h-100">
+
+            <div class="card-body">
+
+                <div class="section-title mb-4">
+
+                    🏗 LSTM Model Architecture
+
+                </div>
+
+                <div class="architecture-flow">
+
+                    <!-- Input -->
+
+                    <div class="architecture-block input">
+
+                        <div class="block-icon">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                        </div>
+
+                        <h5>Input Layer</h5>
+
+                        <p>Sequence Length = 12</p>
+
+                    </div>
+
+                    <div class="flow-arrow">
+                        <i class="bi bi-arrow-down"></i>
+                    </div>
+
+                    <!-- LSTM 1 -->
+
+                    <div class="architecture-block lstm">
+
+                        <div class="block-icon">
+                            <i class="bi bi-cpu-fill"></i>
+                        </div>
+
+                        <h5>LSTM Layer 1</h5>
+
+                        <p>64 Hidden Units</p>
+
+                    </div>
+
+                    <div class="flow-arrow">
+                        <i class="bi bi-arrow-down"></i>
+                    </div>
+
+                    <!-- LSTM 2 -->
+
+                    <div class="architecture-block lstm">
+
+                        <div class="block-icon">
+                            <i class="bi bi-cpu-fill"></i>
+                        </div>
+
+                        <h5>LSTM Layer 2</h5>
+
+                        <p>64 Hidden Units</p>
+
+                    </div>
+
+                    <div class="flow-arrow">
+                        <i class="bi bi-arrow-down"></i>
+                    </div>
+
+                    <!-- Dropout -->
+
+                    <div class="architecture-block dropout">
+
+                        <div class="block-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+
+                        <h5>Dropout Layer</h5>
+
+                        <p>Rate = 0.20</p>
+
+                    </div>
+
+                    <div class="flow-arrow">
+                        <i class="bi bi-arrow-down"></i>
+                    </div>
+
+                    <!-- Dense -->
+
+                    <div class="architecture-block dense">
+
+                        <div class="block-icon">
+                            <i class="bi bi-diagram-3-fill"></i>
+                        </div>
+
+                        <h5>Dense Layer</h5>
+
+                        <p>32 Neurons</p>
+
+                    </div>
+
+                    <div class="flow-arrow">
+                        <i class="bi bi-arrow-down"></i>
+                    </div>
+
+                    <!-- Output -->
+
+                    <div class="architecture-block output">
+
+                        <div class="block-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+
+                        <h5>Output Layer</h5>
+
+                        <p>24-Hour Energy Forecast</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Configuration Card -->
+
+    <div class="col-lg-4">
+
+        <div class="card h-100">
+
+            <div class="card-body">
+
+                <div class="section-title mb-4">
+
+                    ⚙ Configuration
+
+                </div>
+
+                <div class="config-item">
+                    <span>Framework</span>
+                    <strong>PyTorch</strong>
+                </div>
+
+                <div class="config-item">
+                    <span>LSTM Layers</span>
+                    <strong>2</strong>
+                </div>
+
+                <div class="config-item">
+                    <span>Hidden Size</span>
+                    <strong>64</strong>
+                </div>
+
+                <div class="config-item">
+                    <span>Dense Layer</span>
+                    <strong>32 Neurons</strong>
+                </div>
+
+                <div class="config-item">
+                    <span>Dropout</span>
+                    <strong>0.20</strong>
+                </div>
+
+                <div class="config-item">
+                    <span>Optimizer</span>
+                    <strong>Adam</strong>
+                </div>
+
+                <div class="config-item">
+                    <span>Loss Function</span>
+                    <strong>MSELoss</strong>
+                </div>
+
+                <div class="config-item">
+                    <span>Epochs</span>
+                    <strong>20</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ================= Training Summary ================= -->
+
+<div class="card mt-5">
+
+    <div class="card-body">
+
+        <div class="section-title mb-4">
+
+            📚 Training Summary
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="training-card">
+
+                    <i class="bi bi-database-fill"></i>
+
+                    <h6>Training Split</h6>
+
+                    <h3>80%</h3>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="training-card">
+
+                    <i class="bi bi-check-circle-fill"></i>
+
+                    <h6>Validation Split</h6>
+
+                    <h3>10%</h3>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="training-card">
+
+                    <i class="bi bi-clipboard-data-fill"></i>
+
+                    <h6>Testing Split</h6>
+
+                    <h3>10%</h3>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="training-card">
+
+                    <i class="bi bi-gpu-card"></i>
+
+                    <h6>Training Device</h6>
+
+                    <h3>CUDA</h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='js/model.js') }}"></script>
+
+{% endblock %}

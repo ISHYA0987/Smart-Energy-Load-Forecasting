@@ -408,6 +408,40 @@ def about():
         "about.html"
     )
 
+@app.route("/model")
+def model():
+
+    metrics = get_metrics()
+
+    model_info = {
+
+        "name": "LSTM",
+
+        "sequence": 12,
+
+        "forecast": "24 Hours",
+
+        "dataset": "Smart Meter",
+
+        "optimizer": "Adam",
+
+        "epochs": 100,
+
+        "batch_size": 32,
+
+        "learning_rate": 0.001
+
+    }
+
+    return render_template(
+
+        "model.html",
+
+        metrics=metrics,
+
+        model=model_info
+
+    )
 
 
 if __name__ == "__main__":
