@@ -1,22 +1,74 @@
 {% extends "base.html" %}
+{% block styles %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/analytics.css') }}">
+
+{% endblock %}
+
 
 {% block content %}
 
-<h1>
-Analytics
-</h1>
-<div class="row justify-content-center g-4">
-<div class="row mb-4">
 
-    <div class="col-lg-3 col-md-4">
+<!-- ================= Analytics Header ================= -->
 
-        <div class="card metric-card">
+<div class="analytics-header">
 
-            <div class="card-body text-center">
+    <div>
 
-                <h5>MAE</h5>
+        <h2>📊 Analytics</h2>
 
-                <h2>{{ metrics.mae }}</h2>
+        <p>
+
+            Model evaluation metrics and training analysis.
+
+        </p>
+
+    </div>
+
+    <span class="badge bg-primary">
+
+        LSTM Evaluation
+
+    </span>
+
+</div>
+
+<!-- ================= Metrics ================= -->
+
+<div class="row g-4 mb-5">
+
+    <!-- MAE -->
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="analytics-metric-card">
+
+            <div class="metric-icon blue">
+
+                <i class="bi bi-bullseye"></i>
+
+            </div>
+
+            <div>
+
+                <div class="metric-title">
+
+                    Mean Absolute Error
+
+                </div>
+
+                <div class="metric-value">
+
+                    {{ metrics.mae }}
+
+                </div>
+
+                <small class="text-muted">
+
+                    Lower is Better
+
+                </small>
 
             </div>
 
@@ -24,15 +76,37 @@ Analytics
 
     </div>
 
-    <div class="col-lg-3 col-md-4">
+    <!-- RMSE -->
 
-        <div class="card metric-card">
+    <div class="col-lg-4 col-md-6">
 
-            <div class="card-body text-center">
+        <div class="analytics-metric-card">
 
-                <h5>RMSE</h5>
+            <div class="metric-icon green">
 
-                <h2>{{ metrics.rmse }}</h2>
+                <i class="bi bi-graph-up-arrow"></i>
+
+            </div>
+
+            <div>
+
+                <div class="metric-title">
+
+                    Root Mean Square Error
+
+                </div>
+
+                <div class="metric-value">
+
+                    {{ metrics.rmse }}
+
+                </div>
+
+                <small class="text-muted">
+
+                    Prediction Error
+
+                </small>
 
             </div>
 
@@ -40,15 +114,37 @@ Analytics
 
     </div>
 
-    <div class="col-lg-3 col-md-4">
+    <!-- R² -->
 
-        <div class="card metric-card">
+    <div class="col-lg-4 col-md-6">
 
-            <div class="card-body text-center">
+        <div class="analytics-metric-card">
 
-                <h5>R² Score</h5>
+            <div class="metric-icon purple">
 
-                <h2>{{ metrics.r2 }}</h2>
+                <i class="bi bi-award-fill"></i>
+
+            </div>
+
+            <div>
+
+                <div class="metric-title">
+
+                    R² Score
+
+                </div>
+
+                <div class="metric-value">
+
+                    {{ metrics.r2 }}
+
+                </div>
+
+                <small class="text-muted">
+
+                    Model Accuracy
+
+                </small>
 
             </div>
 
@@ -57,30 +153,234 @@ Analytics
     </div>
 
 </div>
+<!-- ================= Feature Importance ================= -->
+
+<div class="card analytics-card mb-5">
+
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+
+                <h4 class="section-title">
+
+                    <i class="bi bi-bar-chart-line-fill text-primary me-2"></i>
+
+                    Feature Importance Analysis
+
+                </h4>
+
+                <p class="text-muted mb-0">
+
+                    Relative contribution of each feature used by the forecasting model.
+
+                </p>
+
+            </div>
+
+            <span class="badge bg-primary">
+
+                Feature Ranking
+
+            </span>
+
+        </div>
+
+        <div class="chart-container">
+
+            <img
+                src="{{ url_for('static', filename='images/feature_importance.png') }}"
+                class="img-fluid rounded"
+                alt="Feature Importance">
+
+        </div>
+
+    </div>
+
 </div>
-<div class="card p-4 mb-4">
 
-    <h3>
-        Feature Importance
-    </h3>
+<!-- ================= Training History ================= -->
 
-    <img
-    class="img-fluid"
-    src="{{ url_for('static',
-    filename='images/feature_importance.png') }}">
+<div class="card analytics-card mb-5">
+
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+
+                <h4 class="section-title">
+
+                    <i class="bi bi-activity text-success me-2"></i>
+
+                    Training vs Validation Loss
+
+                </h4>
+
+                <p class="text-muted mb-0">
+
+                    Learning curve of the LSTM model during training.
+
+                </p>
+
+            </div>
+
+            <span class="badge bg-success">
+
+                Training History
+
+            </span>
+
+        </div>
+
+        <div class="chart-container">
+
+            <img
+                src="{{ url_for('static', filename='images/training_validation_loss.png') }}"
+                class="img-fluid rounded"
+                alt="Training vs Validation Loss">
+
+        </div>
+
+    </div>
 
 </div>
+<!-- ================= Performance Summary ================= -->
 
-<div class="card p-4">
+<div class="card analytics-card">
 
-    <h3>
-        Training vs Validation Loss
-    </h3>
+    <div class="card-body">
 
-    <img
-    class="img-fluid"
-    src="{{ url_for('static',
-    filename='images/training_validation_loss.png') }}">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+
+                <h4 class="section-title">
+
+                    <i class="bi bi-clipboard-data-fill text-warning me-2"></i>
+
+                    Model Performance Summary
+
+                </h4>
+
+                <p class="text-muted mb-0">
+
+                    Overall evaluation of the LSTM forecasting model.
+
+                </p>
+
+            </div>
+
+            <span class="badge bg-warning text-dark">
+
+                Evaluation Report
+
+            </span>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- MAE -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="summary-box">
+
+                    <div class="summary-icon bg-primary">
+
+                        <i class="bi bi-bullseye"></i>
+
+                    </div>
+
+                    <h5>MAE</h5>
+
+                    <p>
+
+                        A low Mean Absolute Error indicates the model predicts energy consumption with high accuracy.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- RMSE -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="summary-box">
+
+                    <div class="summary-icon bg-success">
+
+                        <i class="bi bi-graph-up-arrow"></i>
+
+                    </div>
+
+                    <h5>RMSE</h5>
+
+                    <p>
+
+                        The Root Mean Square Error shows prediction errors remain consistently low.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- R² -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="summary-box">
+
+                    <div class="summary-icon bg-purple">
+
+                        <i class="bi bi-award-fill"></i>
+
+                    </div>
+
+                    <h5>R² Score</h5>
+
+                    <p>
+
+                        The model captures approximately 59% of the variance in energy consumption patterns.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Conclusion -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="summary-box">
+
+                    <div class="summary-icon bg-danger">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                    </div>
+
+                    <h5>Conclusion</h5>
+
+                    <p>
+
+                        The LSTM model demonstrates reliable forecasting performance and is suitable for smart energy prediction.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 

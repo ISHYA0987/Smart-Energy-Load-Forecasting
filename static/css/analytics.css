@@ -1,0 +1,278 @@
+/* ===================================
+Analytics Header
+=================================== */
+
+.analytics-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+}
+
+.analytics-header h2{
+
+    font-weight:700;
+
+}
+
+.analytics-header p{
+
+    color:#64748b;
+
+    margin:0;
+
+}
+
+/* ===================================
+Metric Cards
+=================================== */
+
+.analytics-metric-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    height:100%;
+
+    transition:.3s;
+
+    box-shadow:0 10px 25px rgba(15,23,42,.08);
+
+}
+
+.analytics-metric-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 15px 35px rgba(15,23,42,.12);
+
+}
+
+.analytics-metric-card .metric-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:28px;
+
+}
+
+.analytics-metric-card .metric-title{
+
+    font-size:14px;
+
+    color:#64748b;
+
+}
+
+.analytics-metric-card .metric-value{
+
+    font-size:32px;
+
+    font-weight:700;
+
+    color:#0f172a;
+
+}
+
+.blue{
+
+    background:#2563eb;
+
+}
+
+.green{
+
+    background:#22c55e;
+
+}
+
+.purple{
+
+    background:#8b5cf6;
+
+}
+/* ===================================
+Analytics Cards
+=================================== */
+
+.analytics-card{
+
+    border:none;
+
+    border-radius:22px;
+
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+
+    transition:.3s;
+
+}
+
+.analytics-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 16px 40px rgba(15,23,42,.12);
+
+}
+
+.section-title{
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.chart-container{
+
+    background:#f8fafc;
+
+    border-radius:18px;
+
+    padding:20px;
+
+}
+
+.chart-container img{
+
+    width:100%;
+
+    border-radius:14px;
+
+}
+/* ===================================
+Training History
+=================================== */
+
+.chart-container{
+
+    background:#f8fafc;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    overflow:hidden;
+
+}
+
+.chart-container img{
+
+    width:100%;
+
+    border-radius:14px;
+
+    transition:.3s ease;
+
+}
+
+.chart-container img:hover{
+
+    transform:scale(1.01);
+
+}
+/* ===================================
+Performance Summary
+=================================== */
+
+.summary-box{
+
+    background:#f8fafc;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    height:100%;
+
+    text-align:center;
+
+    transition:.3s;
+
+}
+
+.summary-box:hover{
+
+    transform:translateY(-5px);
+
+    background:#eef4ff;
+
+}
+
+.summary-icon{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:28px;
+
+    margin:0 auto 18px;
+
+}
+
+.summary-box h5{
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+}
+
+.summary-box p{
+
+    color:#64748b;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+}
+
+.bg-purple{
+
+    background:#8b5cf6;
+
+}
+
+.bg-danger{
+
+    background:#ef4444;
+
+}
